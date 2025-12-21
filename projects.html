@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects | Dilusha Chandrasiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="desktop-nav">
+    <div class="logo">Dilusha Chandrasiri</div>
+    <div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contacts.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <nav id="hamburger-nav">
+    <div class="logo">Dilusha Chandrasiri</div>
+    <div class="hamburger-menu">
+      <div class="hamburger-icon" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="menu-links">
+        <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+        <li><a href="about.html" onclick="toggleMenu()">About</a></li>
+        <li><a href="experience.html" onclick="toggleMenu()">Experience</a></li>
+        <li><a href="projects.html" onclick="toggleMenu()">Projects</a></li>
+        <li><a href="contacts.html" onclick="toggleMenu()">Contact</a></li>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Projects Section -->
+  <section id="projects" style="padding-top: 8rem;">
+    <p class="section__text__p1">Browse My Recent</p>
+    <h1 class="title">Projects</h1>
+
+    <div class="projects-grid">
+      <!-- Clinic Management System -->
+      <div class="project-card">
+        <img src="assets/clinic.jpg" class="project-img" alt="Clinic Management System">
+        <h2 class="project-title">Clinic Management System</h2>
+        <p class="project-desc">
+          Full-stack Clinic Appointment & Treatment Management System built with Next.js, React, and PostgreSQL.
+        </p>
+        <div class="btn-container">
+          <a href="https://github.com/TenathDilusha/clinic-management-system" target="_blank">
+            <button class="btn btn-color-2 project-btn">GitHub</button>
+          </a>
+        </div>
+      </div>
+
+      <!-- Cryptocurrency Converter -->
+      <div class="project-card">
+        <img src="assets/crypto.jpg" class="project-img" alt="Cryptocurrency Converter">
+        <h2 class="project-title">Cryptocurrency Converter</h2>
+        <p class="project-desc">
+          Node.js app for converting fiat and cryptocurrencies using live exchange rates from APIs.
+        </p>
+        <div class="btn-container">
+          <a href="https://github.com/TenathDilusha/CryptoCurrency-Converter" target="_blank">
+            <button class="btn btn-color-2 project-btn">GitHub</button>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quizzler -->
+      <div class="project-card">
+        <img src="assets/quiz.jpg" class="project-img" alt="Quizzler App">
+        <h2 class="project-title">Quizzler</h2>
+        <p class="project-desc">
+          Python Tkinter quiz app fetching real-time questions from the Open Trivia DB with score tracking.
+        </p>
+        <div class="btn-container">
+          <a href="https://github.com/TenathDilusha/quizzler" target="_blank">
+            <button class="btn btn-color-2 project-btn">GitHub</button>
+          </a>
+        </div>
+      </div>
+
+      <!-- Password Manager -->
+      <div class="project-card">
+        <img src="assets/password.png" class="project-img" alt="Password Manager">
+        <h2 class="project-title">Password Manager</h2>
+        <p class="project-desc">
+          Lightweight password manager with Python & Tkinter. Includes password generator and secure storage.
+        </p>
+        <div class="btn-container">
+          <a href="https://github.com/TenathDilusha/password-manager" target="_blank">
+            <button class="btn btn-color-2 project-btn">GitHub</button>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pomodoro Timer -->
+      <div class="project-card">
+        <img src="assets/pomodoro.png" class="project-img" alt="Pomodoro Timer">
+        <h2 class="project-title">Pomodoro Timer</h2>
+        <p class="project-desc">
+          Productivity-focused Pomodoro Timer built using Python to manage focused work sessions.
+        </p>
+        <div class="btn-container">
+          <a href="https://github.com/TenathDilusha/pomodoro-timer" target="_blank">
+            <button class="btn btn-color-2 project-btn">GitHub</button>
+          </a>
+        </div>
+      </div>
+
+      <!-- French Flashcards -->
+      <div class="project-card">
+        <img src="assets/Flashcards.jpg" class="project-img" alt="French Flashcards">
+        <h2 class="project-title">French Flashcards</h2>
+        <p class="project-desc">
+          Customizable Python flashcards for language learning with editable words and images.
+        </p>
+        <div class="btn-container">
+          <a href="https://github.com/TenathDilusha/french-flashcards" target="_blank">
+            <button class="btn btn-color-2 project-btn">GitHub</button>
+          </a>
+        </div>
+      </div>
+
+      <!-- Snake Game -->
+      <div class="project-card">
+        <img src="assets/Snake_OG-logo.jpg" class="project-img" alt="Snake Game">
+        <h2 class="project-title">Snake Game</h2>
+        <p class="project-desc">
+          Classic Snake game in Python, focused on logic, OOP, and event handling.
+        </p>
+        <div class="btn-container">
+          <a href="https://github.com/TenathDilusha/Snake-Game" target="_blank">
+            <button class="btn btn-color-2 project-btn">GitHub</button>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pong Game -->
+      <div class="project-card">
+        <img src="assets/Pong_game.png" class="project-img" alt="Pong Game">
+        <h2 class="project-title">Pong Game</h2>
+        <p class="project-desc">
+          Python implementation of classic Pong with collision detection and two-player gameplay.
+        </p>
+        <div class="btn-container">
+          <a href="https://github.com/TenathDilusha/Pong-game" target="_blank">
+            <button class="btn btn-color-2 project-btn">GitHub</button>
+          </a>
+        </div>
+      </div>
+
+      <!-- Turtle Crossing Game -->
+      <div class="project-card">
+        <img src="assets/turtle_crossing.jpg" class="project-img" alt="Turtle Crossing Game">
+        <h2 class="project-title">Turtle Crossing Game</h2>
+        <p class="project-desc">
+          Python arcade-style game where a turtle crosses the road, with collision handling.
+        </p>
+        <div class="btn-container">
+          <a href="https://github.com/TenathDilusha/Turtle-crossing-game" target="_blank">
+            <button class="btn btn-color-2 project-btn">GitHub</button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- See More Projects Button -->
+    <div class="btn-container" style="margin-top: 3rem; text-align: center;">
+      <a href="https://github.com/TenathDilusha?tab=repositories" target="_blank">
+        <button class="btn btn-color-1">See More Projects</button>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <nav>
+      <div class="nav-links-container">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contacts.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+    <p>© 2025 Dilusha Chandrasiri</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

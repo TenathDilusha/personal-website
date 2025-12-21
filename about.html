@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Dilusha Chandrasiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="desktop-nav">
+    <div class="logo">Dilusha Chandrasiri</div>
+    <div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contacts.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <nav id="hamburger-nav">
+    <div class="logo">Dilusha Chandrasiri</div>
+    <div class="hamburger-menu">
+      <div class="hamburger-icon" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="menu-links">
+        <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+        <li><a href="about.html" onclick="toggleMenu()">About</a></li>
+        <li><a href="experience.html" onclick="toggleMenu()">Experience</a></li>
+        <li><a href="projects.html" onclick="toggleMenu()">Projects</a></li>
+        <li><a href="contacts.html" onclick="toggleMenu()">Contact</a></li>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="about-hero">
+    <div class="about-hero-content">
+      <div class="about-hero-text">
+        <p class="section__text__p1">Who Am I?</p>
+        <h1 class="title">About Me</h1>
+        <p class="about-hero-description">
+          I'm a passionate Computer Science and Engineering undergraduate at the University of Moratuwa, 
+          driven by innovation, problem-solving, and creating meaningful software solutions. Beyond coding, 
+          I'm an active contributor to tech communities and a dedicated chess player.
+        </p>
+      </div>
+      <div class="about-hero-image">
+        <div class="hero-image-frame">
+          <img src="./assets/about_2.jpeg" alt="Dilusha Chandrasiri" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Facts -->
+  <section id="quick-facts">
+    <h2 class="section-title">Quick Facts</h2>
+    <div class="facts-grid">
+      <div class="fact-card">
+        <div class="fact-icon">🎓</div>
+        <h3>University</h3>
+        <p>BSc (Hons) Computer Science & Engineering</p>
+        <span>University of Moratuwa</span>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">🏫</div>
+        <h3>School</h3>
+        <p>Maliyadeva College</p>
+        <span>Kurunegala</span>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">📌</div>
+        <h3>Location</h3>
+        <p>Kurunegala</p>
+        <span>Sri Lanka</span>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">♟️</div>
+        <h3>Sports</h3>
+        <p>Chess Player</p>
+        <span>University Colours Award  2024</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- My Story -->
+  <section id="my-story">
+    <h2 class="section-title">My Journey</h2>
+    <div class="story-with-image">
+      <div class="story-container">
+        <div class="story-card">
+          <h3>Background</h3>
+          <p>
+            From Kurunegala to the halls of University of Moratuwa, my journey in technology 
+            began with curiosity and evolved into a passion for creating innovative solutions 
+            that make a difference.
+          </p>
+        </div>
+        <div class="story-card">
+          <h3>Passion</h3>
+          <p>
+            I thrive on solving complex problems through code, learning cutting-edge technologies, 
+            and contributing to the tech community. Every project is an opportunity to grow and 
+            create impact.
+          </p>
+        </div>
+        <div class="story-card">
+          <h3>Beyond Code</h3>
+          <p>
+            When I'm not coding, you'll find me strategizing on a chessboard, collaborating with 
+            student organizations like IEEE and CSESS, or exploring new ways to merge technology 
+            with creativity.
+          </p>
+        </div>
+      </div>
+      <div class="story-image">
+        <div class="profile-image-frame">
+          <img src="./assets/about.jpeg" alt="About picture" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chess Section -->
+  <section id="chess-section">
+    <!-- Chess Pieces Animation -->
+    <div class="chess-pieces-container">
+      <span class="floating-piece" style="--delay: 0s; --x: 5%; --duration: 35s; --start-y: 20%;">♔</span>
+      <span class="floating-piece" style="--delay: 2s; --x: 15%; --duration: 42s; --start-y: 80%;">♕</span>
+      <span class="floating-piece" style="--delay: 4s; --x: 25%; --duration: 30s; --start-y: 45%;">♖</span>
+      <span class="floating-piece" style="--delay: 1s; --x: 35%; --duration: 45s; --start-y: 65%;">♗</span>
+      <span class="floating-piece" style="--delay: 3s; --x: 45%; --duration: 38s; --start-y: 30%;">♘</span>
+      <span class="floating-piece" style="--delay: 5s; --x: 55%; --duration: 32s; --start-y: 90%;">♙</span>
+      <span class="floating-piece" style="--delay: 2.5s; --x: 65%; --duration: 40s; --start-y: 55%;">♚</span>
+      <span class="floating-piece" style="--delay: 0.5s; --x: 75%; --duration: 44s; --start-y: 15%;">♛</span>
+      <span class="floating-piece" style="--delay: 3.5s; --x: 85%; --duration: 33s; --start-y: 70%;">♜</span>
+      <span class="floating-piece" style="--delay: 1.5s; --x: 95%; --duration: 48s; --start-y: 40%;">♝</span>
+      <span class="floating-piece" style="--delay: 4.5s; --x: 10%; --duration: 36s; --start-y: 85%;">♞</span>
+      <span class="floating-piece" style="--delay: 6s; --x: 30%; --duration: 50s; --start-y: 25%;">♟</span>
+      <span class="floating-piece" style="--delay: 7s; --x: 50%; --duration: 34s; --start-y: 60%;">♔</span>
+      <span class="floating-piece" style="--delay: 8s; --x: 70%; --duration: 41s; --start-y: 35%;">♕</span>
+      <span class="floating-piece" style="--delay: 9s; --x: 90%; --duration: 31s; --start-y: 75%;">♖</span>
+    </div>
+    
+    <h2 class="section-title">Chess Journey</h2>
+    <div class="chess-content">
+      <div class="chess-info">
+        <div class="chess-achievement">
+          <div class="achievement-badge">🏆</div>
+          <h3>University Colours Award 2024</h3>
+          <p>Proudly represented the University of Moratuwa Chess Team and was honored with the prestigious Colours Award in 2024 for outstanding contributions to university sports.</p>
+        </div>
+        <div class="chess-details">
+          <div class="chess-detail-item">
+            <span class="detail-icon">♟️</span>
+            <div>
+              <h4>University Team Player</h4>
+              <p>Official member of the University of Moratuwa Chess Team</p>
+            </div>
+          </div>
+          <div class="chess-detail-item">
+            <span class="detail-icon">🎯</span>
+            <div>
+              <h4>Strategic Thinking</h4>
+              <p>Chess sharpens my problem-solving and analytical skills in coding</p>
+            </div>
+          </div>
+          <div class="chess-detail-item fide-card">
+            <span class="detail-icon">🌍</span>
+            <div class="fide-card-content">
+              <h4>Internationally Rated Chess Player (FIDE)</h4>
+              <p>Officially rated by the World Chess Federation</p>
+              <a href="https://ratings.fide.com/profile/132104699" target="_blank" class="fide-btn">
+                <span class="fide-icon">♟</span>
+                View FIDE Profile
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chess-images">
+        <div class="chess-featured-image">
+          <img src="./assets/colours.jpeg" alt="Chess Colours Award" />
+        </div>
+        <div class="chess-secondary-images">
+          <div class="chess-image-small">
+            <img src="./assets/chess_1.jpeg" alt="Chess Tournament" />
+          </div>
+          <div class="chess-image-small">
+            <img src="./assets/chess_2.jpeg" alt="Chess Match" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Involvement Section -->
+  <section id="involvement">
+    <h2 class="section-title">Community Involvement</h2>
+    
+    <!-- CSESS -->
+    <div class="involvement-item">
+      <div class="involvement-content">
+        <div class="involvement-image">
+          <img src="assets/cse.jpeg" alt="CSESS" />
+        </div>
+        <div class="involvement-text">
+          <h3>CSESS - Computer Science & Engineering Students' Society</h3>
+          <p class="involvement-role">Professional Development Committee Member</p>
+          <p>
+            As a member of the Professional Development Committee at CSESS, I actively contribute to 
+            organizing career-focused events, technical workshops, and initiatives that empower students 
+            to excel in their professional journeys.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- IEEE Activities -->
+    <div class="involvement-item">
+      <h3 class="involvement-section-title">IEEE Student Branch Activities</h3>
+      <p class="involvement-intro">
+        Active participant in IEEE events, contributing to technical growth and community building.
+      </p>
+      
+      <div class="ieee-activities">
+        <div class="activity-card">
+          <div class="activity-image">
+            <img src="assets/open_week.jpeg" alt="Open Week" />
+          </div>
+          <div class="activity-content">
+            <h4>Open Week</h4>
+            <p>
+              Welcomed new students through technical demonstrations and orientation sessions.
+            </p>
+          </div>
+        </div>
+        <div class="activity-card">
+          <div class="activity-image">
+            <img src="assets/mercon_1.jpeg" alt="MERCon" />
+          </div>
+          <div class="activity-content">
+            <h4>MERCon</h4>
+            <p>
+              Participated in research presentations and technical workshops at Moratuwa Engineering Research Conference.
+            </p>
+          </div>
+        </div>
+        <div class="activity-card">
+          <div class="activity-image">
+            <img src="assets/octave.jpeg" alt="Octwave" />
+          </div>
+          <div class="activity-content">
+            <h4>Octwave</h4>
+            <p>
+              Engaged in seminar series featuring industry experts on technology and innovation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <nav>
+      <div class="nav-links-container">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contacts.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+    <p>© 2025 Dilusha Chandrasiri</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
