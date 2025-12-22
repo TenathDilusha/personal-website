@@ -32,6 +32,21 @@ window.addEventListener('scroll', () => {
     }
   }
   
+  // Background color change when scrolling to about section
+  const aboutSection = document.getElementById('about');
+  if (aboutSection) {
+    const aboutRect = aboutSection.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    // Change to black when about section is mostly visible (allow 30% of other sections)
+    // Change back to white when more than 30% of other section is visible
+    if (aboutRect.top <= windowHeight * 0.3 && aboutRect.bottom >= windowHeight * 0.7) {
+      document.body.classList.add('dark-bg');
+    } else {
+      document.body.classList.remove('dark-bg');
+    }
+  }
+  
   lastScroll = currentScroll;
 });
 
