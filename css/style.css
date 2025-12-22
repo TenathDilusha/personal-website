@@ -918,9 +918,12 @@ section {
 /* New Skills Grid - Clean Design */
 .skills-grid-new {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   margin-top: 2.5rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .skill-category-card {
@@ -933,26 +936,10 @@ section {
   overflow: hidden;
 }
 
-.skill-category-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: var(--accent-gradient);
-  transition: width 0.5s ease;
-  z-index: 0;
-  border-radius: 24px;
-}
-
-.skill-category-card:hover::before {
-  width: 100%;
-}
-
 .skill-category-card:hover {
-  border-color: var(--accent-primary);
-  box-shadow: 0 20px 50px rgba(99, 102, 241, 0.4);
+  background: #000000;
+  border-color: #000000;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
 .skill-category-header {
