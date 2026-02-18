@@ -1869,6 +1869,16 @@ section {
   filter: none !important;
 }
 
+.cert-img-preview {
+  width: 160px;
+  height: 110px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
 .cert-info {
   flex: 1;
   display: flex;
