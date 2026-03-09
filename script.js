@@ -121,127 +121,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Parallax effect for hero image (subtle)
-const heroImage = document.querySelector('.section__pic-container img');
-if (heroImage) {
-  window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const rate = scrolled * 0.1;
-    heroImage.style.transform = `scale(${1 + rate * 0.001})`;
-  });
-}
-
-// Add magnetic effect to buttons
-const buttons = document.querySelectorAll('.btn');
-buttons.forEach(btn => {
-  btn.addEventListener('mousemove', (e) => {
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    
-    btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
-  });
-  
-  btn.addEventListener('mouseleave', () => {
-    btn.style.transform = 'translate(0, 0)';
-  });
-});
-
-// Tilt effect for cards (subtle)
-const tiltCards = document.querySelectorAll('.project-card, .skill-card-static, .fact-card, .hackathon-card');
-tiltCards.forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    const rotateX = (y - centerY) / 20;
-    const rotateY = (centerX - x) / 20;
-    
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-  });
-  
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-  });
-});
-
-// Advanced Typing Animation with Multiple Styles
+// Typing Animation - types name once
 const typingElement = document.getElementById('typing-name');
 if (typingElement) {
   const name = 'Dilusha Chandrasiri';
-  
-  // Different style configurations
-  const styles = [
-    { font: "'Inter', sans-serif", color: 'var(--text-primary)', weight: '700' },
-    { font: "'Playfair Display', serif", color: '#6366f1', weight: '700' },
-    { font: "'Pacifico', cursive", color: '#a855f7', weight: '400' },
-    { font: "'Space Mono', monospace", color: '#06b6d4', weight: '700' },
-    { font: "'Bebas Neue', sans-serif", color: '#f59e0b', weight: '400', letterSpacing: '3px' },
-    { font: "'Inter', sans-serif", gradient: 'linear-gradient(135deg, #6366f1, #a855f7, #ec4899)', weight: '700' }
-  ];
-  
-  let currentStyleIndex = 0;
   let charIndex = 0;
-  let isDeleting = false;
-  let isPaused = false;
-  
   const typeSpeed = 80;
-  const deleteSpeed = 40;
-  const pauseBeforeDelete = 6000; // Increased to 6 seconds
-  const pauseBeforeType = 500;
-  
-  function applyStyle(style) {
-    typingElement.style.fontFamily = style.font;
-    typingElement.style.fontWeight = style.weight;
-    typingElement.style.letterSpacing = style.letterSpacing || 'normal';
-    
-    if (style.gradient) {
-      typingElement.style.background = style.gradient;
-      typingElement.style.webkitBackgroundClip = 'text';
-      typingElement.style.webkitTextFillColor = 'transparent';
-      typingElement.style.backgroundClip = 'text';
-    } else {
-      typingElement.style.background = 'none';
-      typingElement.style.webkitTextFillColor = style.color;
-      typingElement.style.color = style.color;
-    }
-  }
-  
+
   function typeAnimation() {
-    const currentText = name.substring(0, charIndex);
-    typingElement.textContent = currentText;
-    
-    if (!isDeleting && charIndex < name.length) {
-      // Typing
+    if (charIndex < name.length) {
+      typingElement.textContent = name.substring(0, charIndex + 1);
       charIndex++;
       setTimeout(typeAnimation, typeSpeed);
-    } else if (!isDeleting && charIndex === name.length) {
-      // Finished typing, pause then start deleting
-      isPaused = true;
-      setTimeout(() => {
-        isDeleting = true;
-        isPaused = false;
-        typeAnimation();
-      }, pauseBeforeDelete);
-    } else if (isDeleting && charIndex > 0) {
-      // Deleting
-      charIndex--;
-      setTimeout(typeAnimation, deleteSpeed);
-    } else if (isDeleting && charIndex === 0) {
-      // Finished deleting, change style and start typing again
-      isDeleting = false;
-      currentStyleIndex = (currentStyleIndex + 1) % styles.length;
-      applyStyle(styles[currentStyleIndex]);
-      setTimeout(typeAnimation, pauseBeforeType);
     }
   }
-  
-  // Initialize with first style and start animation
-  applyStyle(styles[0]);
+
   setTimeout(typeAnimation, 800);
 }
 

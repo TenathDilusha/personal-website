@@ -141,7 +141,6 @@ body.chess-bg::before {
     radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.08) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
-  animation: gradient-pulse 8s ease-in-out infinite alternate;
   opacity: 0;
   transition: opacity 1s ease;
 }
@@ -175,8 +174,7 @@ body.chess-bg .chess-pieces-bg-global {
   color: rgba(255, 255, 255, 0.1);
   left: var(--x);
   top: var(--start-y);
-  animation: float-up var(--duration) ease-in-out infinite;
-  animation-delay: var(--delay);
+  opacity: 0.6;
   text-shadow: 0 0 40px rgba(99, 102, 241, 0.4);
   filter: blur(0.5px);
 }
@@ -252,7 +250,6 @@ body::before {
   opacity: 0.5;
   pointer-events: none;
   z-index: -1;
-  animation: move-dots 120s linear infinite;
 }
 
 @keyframes move-dots {
@@ -531,7 +528,6 @@ section {
   border-radius: 50%;
   opacity: 0.5;
   transition: var(--transition-slow);
-  animation: pulse-glow 3s ease-in-out infinite;
 }
 
 @keyframes pulse-glow {
@@ -547,8 +543,7 @@ section {
   position: relative;
   z-index: 1;
   border: 5px solid var(--bg-primary);
-  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  animation: float-image 4s ease-in-out infinite;
+  transition: all 0.4s ease;
 }
 
 @keyframes float-image {
@@ -557,9 +552,8 @@ section {
 }
 
 .section__pic-container:hover img {
-  transform: scale(1.05) rotate(2deg);
+  transform: scale(1.04);
   box-shadow: 0 20px 50px rgba(99, 102, 241, 0.3);
-  animation-play-state: paused;
 }
 
 .section__text {
@@ -690,7 +684,7 @@ section {
   overflow: hidden;
   margin: 0;
   position: relative;
-  animation: frame-glow 3s ease-in-out infinite;
+  box-shadow: 0 0 24px rgba(99, 102, 241, 0.25);
 }
 
 @keyframes frame-glow {
@@ -715,7 +709,7 @@ section {
 }
 
 #about .section__pic-container:hover img {
-  transform: scale(1.03) rotate(1deg);
+  transform: scale(1.03);
   box-shadow: 0 20px 50px rgba(99, 102, 241, 0.25);
 }
 
@@ -1596,7 +1590,6 @@ section {
   position: absolute;
   border-radius: 50%;
   border: 2px solid;
-  animation: contact-rotate 20s linear infinite;
 }
 
 .contact-circle-1 {
@@ -1604,7 +1597,6 @@ section {
   height: 100%;
   border-color: var(--accent-primary);
   opacity: 0.3;
-  animation-duration: 25s;
 }
 
 .contact-circle-2 {
@@ -1614,8 +1606,6 @@ section {
   left: 10%;
   border-color: var(--accent-secondary);
   opacity: 0.4;
-  animation-direction: reverse;
-  animation-duration: 20s;
 }
 
 .contact-circle-3 {
@@ -1625,7 +1615,6 @@ section {
   left: 20%;
   border-color: #a855f7;
   opacity: 0.5;
-  animation-duration: 15s;
 }
 
 .contact-center-icon {
@@ -1643,7 +1632,6 @@ section {
   font-size: 3.5rem;
   color: white;
   box-shadow: 0 0 60px rgba(99, 102, 241, 0.5);
-  animation: pulse-center 2s ease-in-out infinite;
 }
 
 @keyframes contact-rotate {
@@ -1668,7 +1656,6 @@ section {
   justify-content: center;
   font-size: 1.5rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  animation: float-contact 4s ease-in-out infinite;
 }
 
 .floating-contact-icon:nth-child(1) { top: 5%; left: 10%; animation-delay: 0s; }
@@ -2006,7 +1993,6 @@ section {
   background: var(--accent-gradient);
   border-radius: 28px;
   z-index: -1;
-  animation: hero-glow 3s ease-in-out infinite;
   opacity: 0.5;
 }
 
@@ -2020,14 +2006,12 @@ section {
   height: 100%;
   object-fit: cover;
   border-radius: 24px;
-  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  animation: float-image 4s ease-in-out infinite;
+  transition: all 0.4s ease;
 }
 
 .hero-image-frame:hover img {
-  transform: scale(1.05) rotate(2deg);
+  transform: scale(1.04);
   box-shadow: 0 20px 50px rgba(99, 102, 241, 0.3);
-  animation-play-state: paused;
 }
 
 /* Quick Facts */
@@ -2213,7 +2197,6 @@ section {
   background: linear-gradient(45deg, #6366f1, #a855f7, #6366f1);
   border-radius: 24px;
   z-index: -1;
-  animation: journey-glow 4s ease-in-out infinite;
   opacity: 0.5;
 }
 
@@ -2226,14 +2209,12 @@ section {
   width: 100%;
   height: auto;
   border-radius: 20px;
-  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  animation: float-image 4s ease-in-out infinite;
+  transition: all 0.4s ease;
 }
 
 .profile-image-frame:hover img {
-  transform: scale(1.05) rotate(1deg);
+  transform: scale(1.04);
   box-shadow: 0 20px 50px rgba(99, 102, 241, 0.3);
-  animation-play-state: paused;
 }
 
 /* Chess Section */
@@ -2271,7 +2252,7 @@ section {
     radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.08) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
-  animation: gradient-pulse 8s ease-in-out infinite alternate;
+  opacity: 0.8;
 }
 
 @keyframes gradient-pulse {
@@ -2294,12 +2275,10 @@ section {
 #chess-section .floating-piece {
   position: absolute;
   font-size: clamp(2.5rem, 5vw, 4.5rem);
-  color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.07);
   left: var(--x);
   top: var(--start-y);
-  animation: float-up var(--duration) ease-in-out infinite;
-  animation-delay: var(--delay);
-  text-shadow: 0 0 40px rgba(99, 102, 241, 0.4);
+  text-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
   filter: blur(0.5px);
 }
 
@@ -2321,14 +2300,13 @@ section {
 #chess-section > .section-title::before {
   content: '♔';
   margin-right: 15px;
-  animation: piece-glow 2s ease-in-out infinite alternate;
+  opacity: 0.8;
 }
 
 #chess-section > .section-title::after {
   content: '♚';
   margin-left: 15px;
-  animation: piece-glow 2s ease-in-out infinite alternate;
-  animation-delay: 1s;
+  opacity: 0.8;
 }
 
 @keyframes piece-glow {
@@ -2399,7 +2377,6 @@ body.chess-bg .chess-achievement {
 .achievement-badge {
   font-size: 3rem;
   margin-bottom: 1rem;
-  animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -2481,7 +2458,6 @@ body.chess-bg .chess-achievement p {
 
 .fide-icon {
   font-size: 1.5rem;
-  animation: piece-bounce 2s ease-in-out infinite;
 }
 
 @keyframes piece-bounce {
