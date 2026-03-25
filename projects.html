@@ -1,326 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects | Dilusha Chandrasiri</title>
+  <meta name="description" content="Projects by Dilusha Chandrasiri — full-stack, AI, and utility builds." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
-  <!-- Navigation -->
-  <nav id="desktop-nav">
-    <div class="logo">Dilusha Chandrasiri</div>
-    <div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="experience.html">Experience</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="contacts.html">Contact</a></li>
+
+  <nav class="masthead">
+    <div class="masthead__inner">
+      <div class="masthead__brand"><a href="index.html">Dilusha Chandrasiri</a></div>
+      <div class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="masthead__links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="experience.html">Experience</a>
+        <a class="active" href="projects.html">Projects</a>
+        <a href="contacts.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+
+    <aside class="sidebar">
+      <div class="author__avatar">
+        <img src="./assets/profile_pic.jpg" alt="Dilusha Chandrasiri" />
+      </div>
+      <div>
+        <h3 class="author__name">Dilusha Chandrasiri</h3>
+        <p class="author__bio">Undergraduate in Computer Science &amp; Engineering<br>University of Moratuwa, Sri Lanka.
+        </p>
+      </div>
+      <ul class="author__urls">
+        <li>
+          <a href="mailto:tenathdilusha@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon">
+              <path
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Email
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/TenathDilusha" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="icon">
+              <path fill-rule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                clip-rule="evenodd" />
+            </svg>
+            All Repositories
+          </a>
+        </li>
       </ul>
+    </aside>
+
+    <main class="main-content" role="main">
+
+      <h1 id="projects">Projects</h1>
+
+      <p>
+        Selected work that balances practicality with polish — full-stack builds, AI-driven assistants,
+        and small utilities that solved real problems for teams and students.
+      </p>
+
+      <h2 id="featured">Featured Projects</h2>
+
+      <div class="project-entry">
+        <h3>Student Assistant AI</h3>
+        <p>React + Node.js chatbot for study help powered by the Gemini API. Handles question answering, concept
+          explanations, and topic summaries.</p>
+        <div class="skill-tags" style="margin-bottom:0.3rem;">
+          <span class="skill-tag">React</span><span class="skill-tag">Node.js</span><span class="skill-tag">Gemini
+            API</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/TenathDilusha/AI-chatbot" target="_blank">[GitHub]</a>
+        </div>
+      </div>
+
+      <div class="project-entry">
+        <h3>DocuMind</h3>
+        <p>Local RAG system for PDF Q&amp;A built with FastAPI, FAISS, and Ollama. Keeps all data on-device for
+          privacy-first workflows.</p>
+        <div class="skill-tags" style="margin-bottom:0.3rem;">
+          <span class="skill-tag">FastAPI</span><span class="skill-tag">FAISS</span><span
+            class="skill-tag">Ollama</span><span class="skill-tag">Python</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/TenathDilusha/DocuMind" target="_blank">[GitHub]</a>
+        </div>
+      </div>
+
+      <div class="project-entry">
+        <h3>DSA Genie</h3>
+        <p>Interactive DSA helper using retrieval-augmented generation. Explains data structures and algorithms with
+          contextual examples.</p>
+        <div class="skill-tags" style="margin-bottom:0.3rem;">
+          <span class="skill-tag">Python</span><span class="skill-tag">LLM</span><span class="skill-tag">React</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/TenathDilusha/DSA-genie" target="_blank">[GitHub]</a>
+        </div>
+      </div>
+
+      <div class="project-entry">
+        <h3>EventHive</h3>
+        <p>Role-based event management platform with NestJS, React, and PostgreSQL. Supports organizers, attendees, and
+          admin roles with full auth.</p>
+        <div class="skill-tags" style="margin-bottom:0.3rem;">
+          <span class="skill-tag">NestJS</span><span class="skill-tag">React</span><span
+            class="skill-tag">PostgreSQL</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/TenathDilusha/EventHive" target="_blank">[GitHub]</a>
+        </div>
+      </div>
+
+      <div class="project-entry">
+        <h3>Mora Kings</h3>
+        <p>Official website for the University of Moratuwa chess team. Displays team news, player profiles, and event
+          results.</p>
+        <div class="skill-tags" style="margin-bottom:0.3rem;">
+          <span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span class="skill-tag">JavaScript</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/TenathDilusha/Mora-Kings" target="_blank">[GitHub]</a>
+        </div>
+      </div>
+
+      <div class="project-entry">
+        <h3>TravelMate</h3>
+        <p>ML-driven travel recommendation system with Flask and React. Suggests destinations based on user preferences
+          and historical data.</p>
+        <div class="skill-tags" style="margin-bottom:0.3rem;">
+          <span class="skill-tag">Flask</span><span class="skill-tag">React</span><span class="skill-tag">ML</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/TenathDilusha/TravelMate" target="_blank">[GitHub]</a>
+        </div>
+      </div>
+
+      <div class="project-entry">
+        <h3>Clinic Management System</h3>
+        <p>Appointment and treatment management built with Next.js and PostgreSQL. Includes role-based access and JWT
+          authentication.</p>
+        <div class="skill-tags" style="margin-bottom:0.3rem;">
+          <span class="skill-tag">Next.js</span><span class="skill-tag">PostgreSQL</span><span
+            class="skill-tag">Auth</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/TenathDilusha/clinic-management-system" target="_blank">[GitHub]</a>
+        </div>
+      </div>
+
+      <div class="project-entry">
+        <h3>Cryptocurrency Converter</h3>
+        <p>Live fiat/crypto conversion tool using public exchange APIs, built with Node.js.</p>
+        <div class="skill-tags" style="margin-bottom:0.3rem;">
+          <span class="skill-tag">Node.js</span><span class="skill-tag">API</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/TenathDilusha/CryptoCurrency-Converter" target="_blank">[GitHub]</a>
+        </div>
+      </div>
+
+      <h2 id="more-builds">More Builds</h2>
+
+      <ul class="pub-list">
+        <li>
+          <strong>Password Manager</strong> — Python Tkinter vault with password generator and local encrypted storage.
+          &nbsp;<a href="https://github.com/TenathDilusha/password-manager" target="_blank">[GitHub]</a>
+        </li>
+        <li>
+          <strong>Pomodoro Timer</strong> — Productivity timer built in Python with session logging.
+          &nbsp;<a href="https://github.com/TenathDilusha/pomodoro-timer" target="_blank">[GitHub]</a>
+        </li>
+        <li>
+          <strong>French Flashcards</strong> — Customizable GUI flashcard app for language practice.
+          &nbsp;<a href="https://github.com/TenathDilusha/french-flashcards" target="_blank">[GitHub]</a>
+        </li>
+        <li>
+          <strong>Snake / Pong / Turtle Crossing</strong> — Classic games rebuilt to sharpen OOP and event handling.
+          &nbsp;<a href="https://github.com/TenathDilusha/Snake-Game" target="_blank">[GitHub]</a>
+        </li>
+      </ul>
+
+      <p style="margin-top:1.5rem;">
+        <a class="btn" href="https://github.com/TenathDilusha?tab=repositories" target="_blank">All repositories on
+          GitHub →</a>
+      </p>
+
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      © 2025 Dilusha Chandrasiri
     </div>
-  </nav>
-
-  <nav id="hamburger-nav">
-    <div class="logo">Dilusha Chandrasiri</div>
-    <div class="hamburger-menu">
-      <div class="hamburger-icon" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <div class="menu-links">
-        <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
-        <li><a href="about.html" onclick="toggleMenu()">About</a></li>
-        <li><a href="experience.html" onclick="toggleMenu()">Experience</a></li>
-        <li><a href="projects.html" onclick="toggleMenu()">Projects</a></li>
-        <li><a href="contacts.html" onclick="toggleMenu()">Contact</a></li>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Projects Section -->
-  <section id="projects" style="padding-top: 8rem;">
-    <p class="section__text__p1">Browse My Recent</p>
-    <h1 class="title">Projects</h1>
-
-    <div class="projects-grid">
-
-      <!-- AI-chatbot -->
-      <div class="project-card">
-        <img src="assets/assisstance.jpeg" class="project-img" alt="Mora Kings Chess">
-        <h2 class="project-title">Student Assistant AI</h2>
-        <div class="project-tech-tags">
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">Express</span>
-          <span class="tech-tag">Gemini API</span>
-        </div>
-        <p class="project-desc">
-          Web-based AI chatbot that helps students with study queries using a React frontend and a Node.js + Express backend powered by Google Gemini.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/AI-chatbot" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- DocuMind -->
-      <div class="project-card">
-        <img src="assets/documind-social-preview.png" class="project-img" alt="Mora Kings Chess">
-        <h2 class="project-title">DocuMind</h2>
-        <div class="project-tech-tags">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">FastAPI</span>
-          <span class="tech-tag">RAG</span>
-          <span class="tech-tag">FAISS</span>
-          <span class="tech-tag">Ollama</span>
-        </div>
-        <p class="project-desc">
-          Privacy-first local RAG system for PDF document Q&amp;A. Upload documents and ask natural language questions with source-aware answers — runs entirely locally.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/DocuMind" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- DSA-genie -->
-      <div class="project-card">
-        <img src="assets/DSA.jpeg" class="project-img" alt="Mora Kings Chess">
-        <h2 class="project-title">DSA Genie</h2>
-        <div class="project-tech-tags">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">FastAPI</span>
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">LLM</span>
-          <span class="tech-tag">RAG</span>
-        </div>
-        <p class="project-desc">
-          Interactive chatbot for Data Structures &amp; Algorithms questions, leveraging a custom knowledge base with LLM and Retrieval-Augmented Generation for accurate answers.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/DSA-genie" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- EventHive -->
-      <div class="project-card">
-        <img src="assets/event.jpeg" class="project-img" alt="Mora Kings Chess">
-        <h2 class="project-title">EventHive</h2>
-        <div class="project-tech-tags">
-          <span class="tech-tag">NestJS</span>
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">PostgreSQL</span>
-          <span class="tech-tag">TypeScript</span>
-        </div>
-        <p class="project-desc">
-          Scalable university event management platform with role-based access, event discovery, registration, approval workflows, and analytics dashboard.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/EventHive" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- Mora-Kings -->
-      <div class="project-card">
-        <img src="assets/morakings.png" class="project-img" alt="Mora Kings Chess">
-        <h2 class="project-title">Mora Kings</h2>
-        <div class="project-tech-tags">
-          <span class="tech-tag">HTML</span>
-          <span class="tech-tag">CSS</span>
-          <span class="tech-tag">JavaScript</span>
-        </div>
-        <p class="project-desc">
-          Official website for the University of Moratuwa chess team — showcasing the team's history, achievements, events, and leadership.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/Mora-Kings" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- TravelMate -->
-      <div class="project-card">
-        <img src="assets/travel.jpeg" class="project-img" alt="Mora Kings Chess">
-        <h2 class="project-title">TravelMate</h2>
-        <div class="project-tech-tags">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">Flask</span>
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">ML</span>
-        </div>
-        <p class="project-desc">
-          Travel recommendation system using machine learning and user reviews to suggest personalised destinations and experiences.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/TravelMate" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- Clinic Management System -->
-      <div class="project-card">
-        <img src="assets/clinic.jpg" class="project-img" alt="Clinic Management System">
-        <h2 class="project-title">Clinic Management System</h2>
-        <p class="project-desc">
-          Full-stack Clinic Appointment & Treatment Management System built with Next.js, React, and PostgreSQL.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/clinic-management-system" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- Cryptocurrency Converter -->
-      <div class="project-card">
-        <img src="assets/crypto.jpg" class="project-img" alt="Cryptocurrency Converter">
-        <h2 class="project-title">Cryptocurrency Converter</h2>
-        <p class="project-desc">
-          Node.js app for converting fiat and cryptocurrencies using live exchange rates from APIs.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/CryptoCurrency-Converter" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- Quizzler -->
-      <div class="project-card">
-        <img src="assets/quiz.jpg" class="project-img" alt="Quizzler App">
-        <h2 class="project-title">Quizzler</h2>
-        <p class="project-desc">
-          Python Tkinter quiz app fetching real-time questions from the Open Trivia DB with score tracking.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/quizzler" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- Password Manager -->
-      <div class="project-card">
-        <img src="assets/password.png" class="project-img" alt="Password Manager">
-        <h2 class="project-title">Password Manager</h2>
-        <p class="project-desc">
-          Lightweight password manager with Python & Tkinter. Includes password generator and secure storage.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/password-manager" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- Pomodoro Timer -->
-      <div class="project-card">
-        <img src="assets/pomodoro.png" class="project-img" alt="Pomodoro Timer">
-        <h2 class="project-title">Pomodoro Timer</h2>
-        <p class="project-desc">
-          Productivity-focused Pomodoro Timer built using Python to manage focused work sessions.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/pomodoro-timer" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- French Flashcards -->
-      <div class="project-card">
-        <img src="assets/Flashcards.jpg" class="project-img" alt="French Flashcards">
-        <h2 class="project-title">French Flashcards</h2>
-        <p class="project-desc">
-          Customizable Python flashcards for language learning with editable words and images.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/french-flashcards" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- Snake Game -->
-      <div class="project-card">
-        <img src="assets/Snake_OG-logo.jpg" class="project-img" alt="Snake Game">
-        <h2 class="project-title">Snake Game</h2>
-        <p class="project-desc">
-          Classic Snake game in Python, focused on logic, OOP, and event handling.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/Snake-Game" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- Pong Game -->
-      <div class="project-card">
-        <img src="assets/Pong_game.png" class="project-img" alt="Pong Game">
-        <h2 class="project-title">Pong Game</h2>
-        <p class="project-desc">
-          Python implementation of classic Pong with collision detection and two-player gameplay.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/Pong-game" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- Turtle Crossing Game -->
-      <div class="project-card">
-        <img src="assets/turtle_crossing.jpg" class="project-img" alt="Turtle Crossing Game">
-        <h2 class="project-title">Turtle Crossing Game</h2>
-        <p class="project-desc">
-          Python arcade-style game where a turtle crosses the road, with collision handling.
-        </p>
-        <div class="btn-container">
-          <a href="https://github.com/TenathDilusha/Turtle-crossing-game" target="_blank">
-            <button class="btn btn-color-2 project-btn">GitHub</button>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- See More Projects Button -->
-    <div class="btn-container" style="margin-top: 3rem; text-align: center;">
-      <a href="https://github.com/TenathDilusha?tab=repositories" target="_blank">
-        <button class="btn btn-color-1">See More Projects</button>
-      </a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <nav>
-      <div class="nav-links-container">
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="experience.html">Experience</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="contacts.html">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-    <p>© 2025 Dilusha Chandrasiri</p>
   </footer>
 
   <script src="script.js"></script>
 </body>
+
 </html>
