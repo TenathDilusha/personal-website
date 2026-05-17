@@ -25,10 +25,10 @@ export default function Header() {
             </li>
             <li>
               <NavLink
-                to={{ pathname: '/', hash: 'about' }}
+                to="/projects"
                 className={({ isActive }) => (isActive ? 'active' : undefined)}
               >
-                About
+                Projects
               </NavLink>
             </li>
           </ul>
