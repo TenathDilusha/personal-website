@@ -1,32 +1,41 @@
 # Personal Website
 
-Welcome to my personal website repository!  
-This website serves as an online portfolio to showcase my skills, projects, education, and contact information.
+Minimal personal portfolio built with React and Vite.
 
-## 🌟 Features
-- **Personal Introduction** – Brief about me and my background.
-- **Skills & Technologies** – Highlighting programming languages and tools I use.
-- **Projects** – Display of selected projects I have built.
-- **Education** – Academic background and achievements.
-- **Contact** – Email and social media links.
-- **Responsive Design** – Optimized for desktop, tablet, and mobile.
+## Stack
 
-## 🛠️ Built With
-- HTML  
-- CSS  
-- JavaScript  
+- React 19
+- React Router
+- Vite 6
 
-## 🚀 Getting Started
-Follow these steps to run the project locally:
+## Getting started
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/TenathDilusha/personal-website.git
+```bash
+npm install
+npm run dev
+```
 
-2. Navigate into the project folder
-   ```bash
-    cd personal-website
+Open [http://localhost:5173](http://localhost:5173).
 
+## Scripts
 
-Open index.html in your browser
-Or, if you have a local server like Live Server extension in VS Code, use it for live preview.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build to `dist/` |
+| `npm run preview` | Preview production build |
+
+## Project structure
+
+```
+src/
+  components/   # Layout, Header, Footer, shared UI
+  pages/        # Home, Projects, Experience
+  data/         # Site content and project lists
+public/
+  assets/       # Images, certificates, CV
+```
+
+## Deploy
+
+Build static files with `npm run build` and deploy the `dist/` folder to GitHub Pages, Netlify, or Vercel.
