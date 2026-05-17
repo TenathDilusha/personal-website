@@ -1,59 +1,68 @@
-import EntryList from '../components/EntryList';
+import { Link } from 'react-router-dom';
+import ExperienceCard from '../components/ExperienceCard';
+import HeroBento from '../components/HeroBento';
+import HighlightBlock from '../components/HighlightBlock';
+import ProjectGrid from '../components/ProjectGrid';
 import SectionHeader from '../components/SectionHeader';
-import EmailButton from '../components/EmailButton';
-import { experiencePreview, featuredProjects, site } from '../data/site';
+import {
+  about,
+  experiencePreview,
+  featuredProjects,
+  highlights,
+} from '../data/site';
 
 export default function Home() {
   return (
     <>
-      <section className="hero">
-        <div className="container">
-          <div className="animate-in">
-            <h1 className="hero__title">{site.name}</h1>
+      <HeroBento />
+
+      <section id="about" className="section section--after-landing" aria-labelledby="about-heading">
+        <div className="container container--wide">
+          <SectionHeader title="About" id="about-heading" />
+          <div className="about-block">
+            <div className="about-block__media">
+              <div className="media-frame media-frame--portrait">
+                <img src={about.image} alt="Dilusha at university" loading="lazy" />
+              </div>
+            </div>
+            <div className="about-block__text">
+              {about.paragraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+              ))}
+            </div>
           </div>
-          <div className="hero__intro animate-in-delay-1">
-            <p>
-              Building reliable, human-friendly products with lean stacks and applied machine learning.
-            </p>
-            <p>
-              Computer Science and Engineering undergraduate at the{' '}
-              <a href="https://uom.lk/" target="_blank" rel="noopener noreferrer">
-                University of Moratuwa
-              </a>
-              , focused on full-stack development, security, and AI.
-            </p>
-            <p>
-              I turn ambiguous problems into clear, shippable solutions — from RAG-powered tools to
-              role-based platforms with secure authentication.
-            </p>
-            <p>
-              Outside code, I&apos;m a FIDE-rated chess player on the University of Moratuwa team,
-              with a Colours Award in 2024.
-            </p>
-          </div>
-          <nav className="hero__social animate-in-delay-2" aria-label="Social links">
-            <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
-              LinkedIn
-            </a>
-            <a href={site.github} target="_blank" rel="noopener noreferrer">
-              GitHub
-            </a>
-            <EmailButton />
-          </nav>
         </div>
       </section>
 
-      <section className="section" aria-labelledby="building-heading">
-        <div className="container">
-          <SectionHeader title="Building" id="building-heading" viewAllTo="/projects" />
-          <EntryList entries={featuredProjects} linkable />
+      <section className="section" aria-labelledby="projects-heading">
+        <div className="container container--wide">
+          <SectionHeader title="Selected Projects" id="projects-heading" viewAllTo="/projects" />
+          <ProjectGrid projects={featuredProjects} variant="featured" />
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="highlights-heading">
+        <div className="container container--wide">
+          <SectionHeader title="Beyond Code" id="highlights-heading" />
+          <div className="highlights">
+            {highlights.map((item, index) => (
+              <HighlightBlock key={item.id} highlight={item} reverse={index % 2 === 1} />
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="section" aria-labelledby="experience-heading">
-        <div className="container">
+        <div className="container container--wide">
           <SectionHeader title="Experience" id="experience-heading" viewAllTo="/experience" />
-          <EntryList entries={experiencePreview} />
+          <div className="experience-grid">
+            {experiencePreview.map((item) => (
+              <ExperienceCard key={item.title} item={item} />
+            ))}
+          </div>
+          <p className="section-cta">
+            <Link to="/experience">View full experience &amp; skills →</Link>
+          </p>
         </div>
       </section>
     </>

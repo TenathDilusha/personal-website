@@ -4,7 +4,7 @@ import { site } from '../data/site';
 export default function Header() {
   return (
     <header className="site-header">
-      <div className="container">
+      <div className="container container--wide">
         <nav className="site-nav" aria-label="Primary">
           <NavLink className="site-logo" to="/">
             {site.shortName}
@@ -16,8 +16,19 @@ export default function Header() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/projects" className={({ isActive }) => (isActive ? 'active' : undefined)}>
-                Projects
+              <NavLink
+                to="/experience"
+                className={({ isActive }) => (isActive ? 'active' : undefined)}
+              >
+                Experience
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={{ pathname: '/', hash: 'about' }}
+                className={({ isActive }) => (isActive ? 'active' : undefined)}
+              >
+                About
               </NavLink>
             </li>
           </ul>

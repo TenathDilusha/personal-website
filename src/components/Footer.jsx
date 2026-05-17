@@ -4,7 +4,7 @@ import EmailButton from './EmailButton';
 export default function Footer() {
   return (
     <footer className="site-footer">
-      <div className="container">
+      <div className="container container--wide">
         <div className="site-footer__inner">
           <p>&copy; {new Date().getFullYear()}</p>
           <ul className="site-footer__links">
