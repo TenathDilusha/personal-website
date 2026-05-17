@@ -25,16 +25,6 @@ class ChatbotModel(nn.Module):
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(0.5)
 
-        def forward(self, x):
-            x = self.relu(self.fc1(x))
-            x = self.dropout(x)
-
-            self.fc1 = nn.Linear(input_size, 128)
-            self.fc2 = nn.Linear(128, 64)
-            self.fc3 = nn.Linear(64, output_size)
-            self.relu = nn.ReLU()
-            self.dropout = nn.Dropout(0.5)
-
     def forward(self, x):
         x = self.relu(self.fc1(x))
         x = self.dropout(x)
@@ -129,9 +119,9 @@ class ChatbotAssistant:
                 loss = criterion(outputs, batch_y)
                 loss.backward()
                 optimizer.step()
-                running_loss += loss
-            
-            print(f"Epoch {epoch+1}: Loss: {running_loss / len(loader):.4f}")
+                running_loss += loss.item()
+
+            print(f"Epoch {epoch + 1}: Loss: {running_loss / len(loader):.4f}")
 
 
     def save_model(self, model_path, dimensions_path, metadata_path="metadata.json"):

@@ -231,7 +231,7 @@ export const hackathons = [
 export const certifications = [
   {
     label: 'Postman API Student Expert',
-    href: 'https://badges.parchment.com/public/assertions/_Fpq6V6lTni69izdB3DZZw?identity__email=tenathdilusha@gmail.com',
+    href: '/assets/certificates/postman-api-student-expert.png',
   },
   {
     label: 'Introduction to Machine Learning',
