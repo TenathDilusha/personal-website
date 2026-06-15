@@ -1,5 +1,0 @@
-nltk
-numpy
-torch
-flask
-flask-cors
