@@ -1,43 +1,183 @@
 import { useEffect, useRef, useState } from 'react';
+import {
+  about,
+  experiencePreview,
+  featuredProjects,
+  site,
+  skills,
+} from '../data/site';
 
 const API_URL = import.meta.env.VITE_CHAT_API_URL || '/api/chat';
+const PROMPT = 'visitor@dilusha:~$ ';
 
-const INTRO_MESSAGE = {
-  id: 'intro',
-  role: 'bot',
-  text:
-    "Hi! I'm Dilusha's portfolio bot. Ask me about projects, experience, skills, or how to get in touch.",
-};
-
-const SUGGESTIONS = [
-  'Who are you?',
-  'What projects have you built?',
-  'How can I contact you?',
+const WELCOME_LINES = [
+  "Welcome to Dilusha's portfolio terminal.",
+  "Type 'help' to see available commands.",
 ];
+
+function createWelcomeLines() {
+  return WELCOME_LINES.map((text, index) => ({
+    id: `welcome-${index}`,
+    type: 'welcome',
+    text,
+  }));
+}
+
+function formatProjects(list) {
+  return list
+    .map((project) => `  ${project.title.padEnd(22)} ${project.period}`)
+    .join('\n');
+}
+
+function runCommand(input) {
+  const trimmed = input.trim();
+  if (!trimmed) return { lines: [] };
+
+  const [cmd, ...args] = trimmed.split(/\s+/);
+  const argStr = args.join(' ');
+  const lower = cmd.toLowerCase();
+
+  switch (lower) {
+    case 'help':
+      return {
+        lines: [
+          {
+            type: 'output',
+            text: `Available commands:
+  help        Show this help message
+  whoami      About Dilusha
+  ls          List portfolio sections
+  projects    List featured projects
+  skills      Show technical skills
+  experience  Education & certifications
+  contact     Email and social links
+  ask         Ask AI a question (e.g. ask what is DocuMind?)
+  clear       Clear the terminal
+  date        Show current date
+  echo        Print text (e.g. echo hello world)`,
+          },
+        ],
+      };
+
+    case 'whoami':
+      return {
+        lines: [
+          {
+            type: 'output',
+            text: `${site.name} — ${site.title}
+${site.tagline}
+
+${about.paragraphs[0]}`,
+          },
+        ],
+      };
+
+    case 'ls':
+      return {
+        lines: [
+          {
+            type: 'output',
+            text: `about/  contact/  experience/  projects/  skills/  cv.pdf`,
+          },
+        ],
+      };
+
+    case 'projects':
+      return {
+        lines: [
+          {
+            type: 'output',
+            text: `Featured projects:\n${formatProjects(featuredProjects)}\n\nRun 'ask <project name>' for details.`,
+          },
+        ],
+      };
+
+    case 'skills':
+      return {
+        lines: skills.map((group) => ({
+          type: 'output',
+          text: `${group.label}: ${group.items.join(', ')}`,
+        })),
+      };
+
+    case 'experience':
+      return {
+        lines: experiencePreview.map((item) => ({
+          type: 'output',
+          text: `${item.title} (${item.period})\n  ${item.description}`,
+        })),
+      };
+
+    case 'contact':
+      return {
+        lines: [
+          {
+            type: 'output',
+            text: `email:    ${site.email}
+linkedin: ${site.linkedin}
+github:   ${site.github}
+cv:       ${site.cv}`,
+          },
+        ],
+      };
+
+    case 'date':
+      return {
+        lines: [
+          {
+            type: 'output',
+            text: new Date().toString(),
+          },
+        ],
+      };
+
+    case 'echo':
+      if (!argStr) {
+        return { lines: [{ type: 'error', text: 'echo: missing operand' }] };
+      }
+      return { lines: [{ type: 'output', text: argStr }] };
+
+    case 'clear':
+      return { clear: true, lines: [] };
+
+    case 'ask':
+      if (!argStr) {
+        return {
+          lines: [{ type: 'error', text: "ask: usage: ask <your question>" }],
+        };
+      }
+      return { ask: argStr, lines: [] };
+
+    default:
+      return {
+        lines: [
+          {
+            type: 'error',
+            text: `${lower}: command not found. Type 'help' for available commands.`,
+          },
+        ],
+      };
+  }
+}
 
 export default function Chatbot() {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState([INTRO_MESSAGE]);
+  const [lines, setLines] = useState(createWelcomeLines);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  // Hint stays in memory only — it reappears on every fresh page load and
-  // only hides during the current session once the user has opened the chat.
   const [hintDismissed, setHintDismissed] = useState(false);
-  // The hint only appears when the visitor is *idle* — i.e. not moving the
-  // mouse or scrolling for a short period. The class on the wrapper handles
-  // a smooth fade either way.
   const [idle, setIdle] = useState(false);
 
   const listRef = useRef(null);
   const inputRef = useRef(null);
+  const historyRef = useRef([]);
+  const historyIndexRef = useRef(-1);
 
   function dismissHint() {
     setHintDismissed(true);
   }
 
-  // Clean up the legacy persistent dismissal flag — the hint now reappears
-  // on every page load.
   useEffect(() => {
     try {
       window.localStorage.removeItem('chatbot-hint-dismissed');
@@ -50,8 +190,8 @@ export default function Chatbot() {
     if (hintDismissed) return undefined;
 
     let activityTimer = null;
-    const INITIAL_DELAY = 800; // wait briefly for the page to settle
-    const IDLE_DELAY = 1600; // ms of no activity before showing again
+    const INITIAL_DELAY = 800;
+    const IDLE_DELAY = 1600;
 
     const handleActivity = () => {
       setIdle(false);
@@ -92,7 +232,7 @@ export default function Chatbot() {
       top: listRef.current.scrollHeight,
       behavior: 'smooth',
     });
-  }, [messages, loading]);
+  }, [lines, loading, error]);
 
   useEffect(() => {
     function handleKey(event) {
@@ -104,23 +244,15 @@ export default function Chatbot() {
     return () => window.removeEventListener('keydown', handleKey);
   }, [open]);
 
-  async function sendMessage(rawMessage) {
-    const message = rawMessage.trim();
-    if (!message || loading) return;
-
-    setError(null);
-    setMessages((prev) => [
-      ...prev,
-      { id: `u-${Date.now()}`, role: 'user', text: message },
-    ]);
-    setInput('');
+  async function askAi(question) {
     setLoading(true);
+    setError(null);
 
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ message: question }),
       });
 
       if (!response.ok) {
@@ -130,22 +262,84 @@ export default function Chatbot() {
       const data = await response.json();
       const reply = (data && data.reply) || "Hmm, I didn't catch that. Try again?";
 
-      setMessages((prev) => [
+      setLines((prev) => [
         ...prev,
-        { id: `b-${Date.now()}`, role: 'bot', text: reply },
+        { id: `out-${Date.now()}`, type: 'output', text: reply },
       ]);
-    } catch (err) {
+    } catch {
       setError(
-        'The chatbot is offline right now. Start the backend with `cd backend && python3 server.py` and try again.',
+        'Backend offline. Start it with `cd backend && python3 server.py`, or try local commands like help, whoami, projects.',
       );
     } finally {
       setLoading(false);
     }
   }
 
+  async function executeCommand(rawCommand) {
+    const command = rawCommand.trim();
+    if (!command || loading) return;
+
+    setError(null);
+    historyRef.current = [command, ...historyRef.current.filter((item) => item !== command)].slice(
+      0,
+      50,
+    );
+    historyIndexRef.current = -1;
+
+    const commandLine = {
+      id: `cmd-${Date.now()}`,
+      type: 'command',
+      text: command,
+    };
+
+    const result = runCommand(command);
+
+    if (result.clear) {
+      setLines([commandLine, ...createWelcomeLines()]);
+      return;
+    }
+
+    const outputLines = result.lines.map((line, index) => ({
+      id: `out-${Date.now()}-${index}`,
+      ...line,
+    }));
+
+    setLines((prev) => [...prev, commandLine, ...outputLines]);
+
+    if (result.ask) {
+      await askAi(result.ask);
+    }
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
-    sendMessage(input);
+    const command = input;
+    setInput('');
+    executeCommand(command);
+  }
+
+  function handleInputKeyDown(event) {
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      const history = historyRef.current;
+      if (!history.length) return;
+      const nextIndex = Math.min(historyIndexRef.current + 1, history.length - 1);
+      historyIndexRef.current = nextIndex;
+      setInput(history[nextIndex]);
+      return;
+    }
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      if (historyIndexRef.current <= 0) {
+        historyIndexRef.current = -1;
+        setInput('');
+        return;
+      }
+      const nextIndex = historyIndexRef.current - 1;
+      historyIndexRef.current = nextIndex;
+      setInput(historyRef.current[nextIndex]);
+    }
   }
 
   const showHint = !open && !hintDismissed;
@@ -160,9 +354,9 @@ export default function Chatbot() {
         >
           <div className="chatbot-hint__inner">
             <p className="chatbot-hint__text">
-              Psst — ask me
+              Psst — try the
               <br />
-              anything!
+              terminal!
             </p>
             <svg
               className="chatbot-hint__arrow"
@@ -170,7 +364,6 @@ export default function Chatbot() {
               fill="none"
               aria-hidden="true"
             >
-              {/* Hand-drawn curve from the text down to the chat button */}
               <path
                 d="M14 18 C 30 10, 54 16, 74 32 C 94 48, 116 78, 140 110"
                 stroke="currentColor"
@@ -178,7 +371,6 @@ export default function Chatbot() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
-              {/* Arrowhead V — the apex sits on the curve's tip */}
               <path
                 d="M124 92 L 140 110 L 120 104"
                 stroke="currentColor"
@@ -199,7 +391,7 @@ export default function Chatbot() {
         }}
         aria-expanded={open}
         aria-controls="chatbot-panel"
-        aria-label={open ? 'Close chat assistant' : 'Open chat assistant'}
+        aria-label={open ? 'Close terminal' : 'Open terminal'}
       >
         <span className="chatbot-fab__icon" aria-hidden="true">
           {open ? (
@@ -209,11 +401,8 @@ export default function Chatbot() {
             </svg>
           ) : (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path
-                d="M21 12a8 8 0 0 1-11.6 7.15L4 20l.85-5.4A8 8 0 1 1 21 12z"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-              />
+              <path d="M4 17l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M12 19h8" strokeLinecap="round" />
             </svg>
           )}
         </span>
@@ -223,88 +412,80 @@ export default function Chatbot() {
 
       <section
         id="chatbot-panel"
-        className={`chatbot-panel${open ? ' chatbot-panel--open' : ''}`}
-        aria-label="Chat assistant"
+        className={`chatbot-panel terminal-panel${open ? ' chatbot-panel--open' : ''}`}
+        aria-label="Portfolio terminal"
         aria-hidden={!open}
       >
-        <header className="chatbot-panel__head">
-          <div>
-            <p className="chatbot-panel__title">Portfolio Bot</p>
-            <p className="chatbot-panel__sub">Ask anything about Dilusha</p>
+        <header className="terminal-panel__head">
+          <div className="terminal-panel__dots" aria-hidden="true">
+            <span className="terminal-panel__dot terminal-panel__dot--close" />
+            <span className="terminal-panel__dot terminal-panel__dot--minimize" />
+            <span className="terminal-panel__dot terminal-panel__dot--maximize" />
           </div>
+          <p className="terminal-panel__title">dilusha@portfolio — bash</p>
           <button
             type="button"
-            className="chatbot-panel__close"
+            className="terminal-panel__close"
             onClick={() => setOpen(false)}
-            aria-label="Close chat assistant"
+            aria-label="Close terminal"
           >
             ×
           </button>
         </header>
 
-        <div className="chatbot-panel__messages" ref={listRef} role="log" aria-live="polite">
-          {messages.map((message) => (
+        <div className="terminal-panel__body" ref={listRef} role="log" aria-live="polite">
+          {lines.map((line) => (
             <div
-              key={message.id}
-              className={`chatbot-msg chatbot-msg--${message.role}`}
+              key={line.id}
+              className={`terminal-line terminal-line--${line.type}`}
             >
-              <span className="chatbot-msg__bubble">{message.text}</span>
+              {line.type === 'command' ? (
+                <>
+                  <span className="terminal-line__prompt">{PROMPT}</span>
+                  <span className="terminal-line__command">{line.text}</span>
+                </>
+              ) : (
+                <span className="terminal-line__text">{line.text}</span>
+              )}
             </div>
           ))}
+
           {loading && (
-            <div className="chatbot-msg chatbot-msg--bot">
-              <span className="chatbot-msg__bubble chatbot-msg__bubble--typing">
-                <span />
-                <span />
-                <span />
+            <div className="terminal-line terminal-line--output">
+              <span className="terminal-line__text terminal-line__text--loading">
+                thinking<span className="terminal-cursor" />
               </span>
             </div>
           )}
+
           {error && (
-            <p className="chatbot-panel__error" role="alert">
+            <p className="terminal-panel__error" role="alert">
               {error}
             </p>
           )}
+
+          <form className="terminal-prompt" onSubmit={handleSubmit}>
+            <label className="terminal-prompt__row" htmlFor="terminal-input">
+              <span className="terminal-line__prompt">{PROMPT}</span>
+              <input
+                id="terminal-input"
+                ref={inputRef}
+                type="text"
+                className={`terminal-prompt__input${input ? ' terminal-prompt__input--active' : ''}`}
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                onKeyDown={handleInputKeyDown}
+                disabled={loading}
+                autoComplete="off"
+                spellCheck={false}
+                aria-label="Terminal command"
+              />
+              {!loading && !input && (
+                <span className="terminal-cursor terminal-cursor--input" aria-hidden="true" />
+              )}
+            </label>
+          </form>
         </div>
-
-        {messages.length === 1 && !loading && (
-          <div className="chatbot-suggestions">
-            {SUGGESTIONS.map((suggestion) => (
-              <button
-                key={suggestion}
-                type="button"
-                className="chatbot-suggestions__item"
-                onClick={() => sendMessage(suggestion)}
-              >
-                {suggestion}
-              </button>
-            ))}
-          </div>
-        )}
-
-        <form className="chatbot-input" onSubmit={handleSubmit}>
-          <input
-            ref={inputRef}
-            type="text"
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-            placeholder="Type a message..."
-            aria-label="Type a message"
-            disabled={loading}
-            autoComplete="off"
-          />
-          <button
-            type="submit"
-            className="chatbot-input__send"
-            disabled={loading || !input.trim()}
-            aria-label="Send message"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="M5 12h14" strokeLinecap="round" />
-              <path d="m12 5 7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </form>
       </section>
     </>
   );
