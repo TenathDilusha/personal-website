@@ -3,12 +3,14 @@ import {
   about,
   experiencePreview,
   featuredProjects,
+  projects,
   site,
   skills,
 } from '../data/site';
 
-const API_URL = import.meta.env.VITE_CHAT_API_URL || '/api/chat';
 const PROMPT = 'visitor@dilusha:~$ ';
+const COMMAND_NOT_FOUND = (cmd) =>
+  `${cmd}: command not found. Type 'help' for available commands.`;
 
 const WELCOME_LINES = [
   "Welcome to Dilusha's portfolio terminal.",
@@ -27,6 +29,26 @@ function formatProjects(list) {
   return list
     .map((project) => `  ${project.title.padEnd(22)} ${project.period}`)
     .join('\n');
+}
+
+function findProject(query) {
+  const needle = query.trim().toLowerCase();
+  return projects.find(
+    (project) =>
+      project.id === needle ||
+      project.title.toLowerCase() === needle ||
+      project.title.toLowerCase().replace(/\s+/g, '-') === needle,
+  );
+}
+
+function formatProject(project) {
+  return `${project.title} (${project.period})
+${project.description}
+
+${project.details}
+
+stack: ${project.tags.join(', ')}
+url:   ${project.href}`;
 }
 
 function runCommand(input) {
@@ -51,7 +73,7 @@ function runCommand(input) {
   skills      Show technical skills
   experience  Education & certifications
   contact     Email and social links
-  ask         Ask AI a question (e.g. ask what is DocuMind?)
+  cat         Read a project (e.g. cat DocuMind)
   clear       Clear the terminal
   date        Show current date
   echo        Print text (e.g. echo hello world)`,
@@ -87,7 +109,7 @@ ${about.paragraphs[0]}`,
         lines: [
           {
             type: 'output',
-            text: `Featured projects:\n${formatProjects(featuredProjects)}\n\nRun 'ask <project name>' for details.`,
+            text: `Featured projects:\n${formatProjects(featuredProjects)}\n\nRun 'cat <project>' for details.`,
           },
         ],
       };
@@ -137,25 +159,26 @@ cv:       ${site.cv}`,
       }
       return { lines: [{ type: 'output', text: argStr }] };
 
+    case 'cat':
+      if (!argStr) {
+        return { lines: [{ type: 'error', text: 'cat: missing operand' }] };
+      }
+      {
+        const project = findProject(argStr);
+        if (!project) {
+          return {
+            lines: [{ type: 'error', text: COMMAND_NOT_FOUND('cat') }],
+          };
+        }
+        return { lines: [{ type: 'output', text: formatProject(project) }] };
+      }
+
     case 'clear':
       return { clear: true, lines: [] };
 
-    case 'ask':
-      if (!argStr) {
-        return {
-          lines: [{ type: 'error', text: "ask: usage: ask <your question>" }],
-        };
-      }
-      return { ask: argStr, lines: [] };
-
     default:
       return {
-        lines: [
-          {
-            type: 'error',
-            text: `${lower}: command not found. Type 'help' for available commands.`,
-          },
-        ],
+        lines: [{ type: 'error', text: COMMAND_NOT_FOUND(lower) }],
       };
   }
 }
@@ -164,8 +187,6 @@ export default function Chatbot() {
   const [open, setOpen] = useState(false);
   const [lines, setLines] = useState(createWelcomeLines);
   const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [hintDismissed, setHintDismissed] = useState(false);
   const [idle, setIdle] = useState(false);
 
@@ -232,7 +253,7 @@ export default function Chatbot() {
       top: listRef.current.scrollHeight,
       behavior: 'smooth',
     });
-  }, [lines, loading, error]);
+  }, [lines]);
 
   useEffect(() => {
     function handleKey(event) {
@@ -244,42 +265,10 @@ export default function Chatbot() {
     return () => window.removeEventListener('keydown', handleKey);
   }, [open]);
 
-  async function askAi(question) {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: question }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Request failed (${response.status})`);
-      }
-
-      const data = await response.json();
-      const reply = (data && data.reply) || "Hmm, I didn't catch that. Try again?";
-
-      setLines((prev) => [
-        ...prev,
-        { id: `out-${Date.now()}`, type: 'output', text: reply },
-      ]);
-    } catch {
-      setError(
-        'Backend offline. Start it with `cd backend && python3 server.py`, or try local commands like help, whoami, projects.',
-      );
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function executeCommand(rawCommand) {
+  function executeCommand(rawCommand) {
     const command = rawCommand.trim();
-    if (!command || loading) return;
+    if (!command) return;
 
-    setError(null);
     historyRef.current = [command, ...historyRef.current.filter((item) => item !== command)].slice(
       0,
       50,
@@ -305,10 +294,6 @@ export default function Chatbot() {
     }));
 
     setLines((prev) => [...prev, commandLine, ...outputLines]);
-
-    if (result.ask) {
-      await askAi(result.ask);
-    }
   }
 
   function handleSubmit(event) {
@@ -417,11 +402,6 @@ export default function Chatbot() {
         aria-hidden={!open}
       >
         <header className="terminal-panel__head">
-          <div className="terminal-panel__dots" aria-hidden="true">
-            <span className="terminal-panel__dot terminal-panel__dot--close" />
-            <span className="terminal-panel__dot terminal-panel__dot--minimize" />
-            <span className="terminal-panel__dot terminal-panel__dot--maximize" />
-          </div>
           <p className="terminal-panel__title">dilusha@portfolio — bash</p>
           <button
             type="button"
@@ -450,39 +430,27 @@ export default function Chatbot() {
             </div>
           ))}
 
-          {loading && (
-            <div className="terminal-line terminal-line--output">
-              <span className="terminal-line__text terminal-line__text--loading">
-                thinking<span className="terminal-cursor" />
-              </span>
-            </div>
-          )}
-
-          {error && (
-            <p className="terminal-panel__error" role="alert">
-              {error}
-            </p>
-          )}
-
           <form className="terminal-prompt" onSubmit={handleSubmit}>
             <label className="terminal-prompt__row" htmlFor="terminal-input">
               <span className="terminal-line__prompt">{PROMPT}</span>
-              <input
-                id="terminal-input"
-                ref={inputRef}
-                type="text"
-                className={`terminal-prompt__input${input ? ' terminal-prompt__input--active' : ''}`}
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
-                onKeyDown={handleInputKeyDown}
-                disabled={loading}
-                autoComplete="off"
-                spellCheck={false}
-                aria-label="Terminal command"
-              />
-              {!loading && !input && (
-                <span className="terminal-cursor terminal-cursor--input" aria-hidden="true" />
-              )}
+              <span className="terminal-prompt__entry">
+                <span className="terminal-prompt__display" aria-hidden="true">
+                  <span className="terminal-prompt__value">{input}</span>
+                  <span className="terminal-cursor" />
+                </span>
+                <input
+                  id="terminal-input"
+                  ref={inputRef}
+                  type="text"
+                  className="terminal-prompt__input"
+                  value={input}
+                  onChange={(event) => setInput(event.target.value)}
+                  onKeyDown={handleInputKeyDown}
+                  autoComplete="off"
+                  spellCheck={false}
+                  aria-label="Terminal command"
+                />
+              </span>
             </label>
           </form>
         </div>
